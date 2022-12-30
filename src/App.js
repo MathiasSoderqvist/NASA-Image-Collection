@@ -1,4 +1,5 @@
 import nasaLogo from './nasa.svg';
+import { useState } from 'react';
 import { getSearch } from './ApiService';
 import './App.css';
 import { styled, alpha } from '@mui/material/styles';
@@ -50,6 +51,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function App() {
+  let [searchResults, setSearchResults] = useState([]);
 
 useEffect(() => {
   getSearch('apollo', 1969, 1972)
@@ -57,7 +59,9 @@ useEffect(() => {
 }, []);
 
 const onSubmitSearch = (val) => {
-  console.log(val.currentTarget[0].value);
+  getSearch(val.currentTarget[0].value)
+  .then((data) => setSearchResults(data.collection.items))
+  console.log(searchResults);
    val.preventDefault();  
 };
 
