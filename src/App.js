@@ -56,6 +56,11 @@ useEffect(() => {
   .then((data) => console.log(data))
 }, []);
 
+const onSubmitSearch = (val) => {
+  console.log(val.currentTarget[0].value);
+   val.preventDefault();  
+};
+
   return (
     <div className="App">
       <header className="App-header">
@@ -63,15 +68,17 @@ useEffect(() => {
           NASA Image Collection
         </Typography>
         <img src={nasaLogo} className="App-logo" alt="logo" />
-        <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+        <form onSubmit={onSubmitSearch}>
+          <Search>
+              <SearchIconWrapper type='submit'>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+        </form>
       </header>
     </div>
   );
