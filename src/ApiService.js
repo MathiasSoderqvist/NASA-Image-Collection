@@ -10,7 +10,7 @@ function fetchRequest (path, options) {
 
 //SEARCH
 export const getSearch = (searchWord, year_start, year_end) => {
-  let queryString = '/search?q='+ searchWord;
+  let queryString = '/search?q='+ searchWord + '&media_type=image';
   if (year_start && year_end) {
     queryString += '&year_start='+ year_start + '&year_end='+ year_end;
   } else if (year_start && !year_end) {

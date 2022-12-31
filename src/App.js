@@ -3,10 +3,15 @@ import { useState } from 'react';
 import { getSearch } from './ApiService';
 import './App.css';
 import { styled, alpha } from '@mui/material/styles';
-import { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,17 +58,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function App() {
   let [searchResults, setSearchResults] = useState([]);
 
-useEffect(() => {
-  getSearch('apollo', 1969, 1972)
-  .then((data) => console.log(data))
-}, []);
+  const onSubmitSearch = (val) => {
+    val.preventDefault();  
 
-const onSubmitSearch = (val) => {
-  getSearch(val.currentTarget[0].value)
-  .then((data) => setSearchResults(data.collection.items))
-  console.log(searchResults);
-   val.preventDefault();  
-};
+    getSearch(val.currentTarget[0].value)
+    .then((data) => setSearchResults(data.collection.items))
+    console.log(searchResults);
+  };
+
+  // loading
 
   return (
     <div className="App">
@@ -83,6 +86,32 @@ const onSubmitSearch = (val) => {
               />
             </Search>
         </form>
+      {/* map search result tile */}
+          <ImageList sx={{ width: 500, height: 450 }}>
+            <ImageListItem key="Subheader" cols={2}>
+              <ListSubheader component="div">Search Results</ListSubheader>
+            </ImageListItem>
+            {searchResults.map((item) => (
+              <ImageListItem key={item.data[0].nasa_id}>
+                <img
+                  src={item.links[0].href}
+                  alt={item.data[0].title ?? 'placeholder'}
+                />
+                <ImageListItemBar
+                  title={item.data[0].title}
+                  subtitle={item.data[0].description}
+                  actionIcon={
+                    <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${item.data[0].title}`}
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  }
+                  />
+              </ImageListItem>
+            ))}
+          </ImageList>
       </header>
     </div>
   );
