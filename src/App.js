@@ -6,12 +6,9 @@ import { styled, alpha } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
+import { SearchResultList } from './SearchResultList';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -67,6 +64,11 @@ function App() {
   };
 
   // loading
+  if (searchResults.length === 0) {
+    <Box sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box>
+  }
 
   return (
     <div className="App">
@@ -86,32 +88,7 @@ function App() {
               />
             </Search>
         </form>
-      {/* map search result tile */}
-          <ImageList sx={{ width: 500, height: 450 }}>
-            <ImageListItem key="Subheader" cols={2}>
-              <ListSubheader component="div">Search Results</ListSubheader>
-            </ImageListItem>
-            {searchResults.map((item) => (
-              <ImageListItem key={item.data[0].nasa_id}>
-                <img
-                  src={item.links[0].href}
-                  alt={item.data[0].title ?? 'placeholder'}
-                />
-                <ImageListItemBar
-                  title={item.data[0].title}
-                  subtitle={item.data[0].description}
-                  actionIcon={
-                    <IconButton
-                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                    aria-label={`info about ${item.data[0].title}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  }
-                  />
-              </ImageListItem>
-            ))}
-          </ImageList>
+        <SearchResultList searchResults={searchResults} />
       </header>
     </div>
   );
