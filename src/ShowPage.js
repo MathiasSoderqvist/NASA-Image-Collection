@@ -14,6 +14,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useContext } from 'react';
+import { ShowPageItemContext } from './ShowPageItemContext';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,15 +30,18 @@ const ExpandMore = styled((props) => {
 
 export const ShowPage = () => {
   const [expanded, setExpanded] = React.useState(false);
+  const { showPageItem } = useContext(ShowPageItemContext);
+  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  // BACK BTN FUNCTIONALITY
   const goBack = () => {
     window.history.back();
   };
+
+  console.log('showpage item: ', showPageItem);
   
   return (
     <div>
@@ -59,8 +64,8 @@ export const ShowPage = () => {
         <CardMedia
           component="img"
           height="194"
-          image="/static/images/cards/paella.jpg"
-          alt="Paella dish"
+          image={showPageItem.links[0].href}
+          alt={showPageItem.data[0].title}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">

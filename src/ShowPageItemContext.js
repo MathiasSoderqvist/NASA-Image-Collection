@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const defaultValue = {
   showPageItem: {},
-  setShowPageItem: () => undefined,
+  setShowPageItem: () => {},
 };
 
 export const ShowPageItemContext = createContext(defaultValue);
