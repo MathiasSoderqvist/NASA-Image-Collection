@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { red } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import CardMedia from '@mui/material/CardMedia';
@@ -14,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ShowPageItemContext } from '../ShowPageItemContext';
 
@@ -49,19 +47,14 @@ export const ShowPage = () => {
   };
   
   return (
-    <Stack justifyContent={'center'} alignItems='center'>
+    <Stack justifyContent='center' alignItems='center' backgroundColor='#282c34'sx={{ minHeight: '100vh' }}>
       <Button variant='contained' onClick={goBack} sx={{ marginTop: '5rem' }}>Back to Search</Button>
-      <Card sx={{ maxWidth: 350, marginTop: '5rem' }} >
+      <Card sx={{ maxWidth: 350, marginTop: '5rem', marginBottom: '5rem' }} >
         <CardHeader
           subheader={dateCreated}
           title={showPageItem.data[0].title}
           avatar={
-            <Avatar src={showPageItem.links[0].href} sx={{ bgcolor: red[500] }} aria-label="recipe"/>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+            <Avatar src={showPageItem.links[0].href} aria-label={showPageItem.data[0].title} />
           }
         />
         <CardMedia

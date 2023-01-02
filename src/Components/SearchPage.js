@@ -63,20 +63,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const SearchPage = () => {
   let [yearEnd, setYearEnd] = useState();
+  let [loaded, setLoaded] = useState(false);
   let [yearStart, setYearStart] = useState();
   let [loading, setLoading] = useState(false);
+  let [searchInput, setSearchInput] = useState('');
   let [searchResults, setSearchResults] = useState([]);
 
   const onSubmitSearch = (val) => {
     val.preventDefault();  
     setLoading(true);
+    setSearchInput(val.currentTarget[0].value);
     const finalYearStart = yearStart ? yearStart.getFullYear().toString() : '';
     const finalYearEnd = yearEnd ? yearEnd.getFullYear().toString() : '';
 
     getSearch(val.currentTarget[0].value, finalYearStart, finalYearEnd)
     .then((data) => setSearchResults(data.collection.items))
     setLoading(false);
+    setLoaded(true);
   };
+
+  const color = 'white';
 
   return (
     <div className="App">
@@ -92,7 +98,16 @@ export const SearchPage = () => {
             onChange={(newValue) => {
               setYearStart(newValue);
             }}
-            renderInput={(params) => <TextField {...params} helperText={null} />}
+            renderInput={(params) => 
+              <TextField 
+                {...params} 
+                helperText={null} 
+                sx={{
+                  svg: { color },
+                  input: { color },
+                  label: { color }
+                }} 
+              />}
             sx={{ marginBottom: '2rem' }}
           />
           <DatePicker
@@ -102,7 +117,16 @@ export const SearchPage = () => {
             onChange={(newValue) => {
               setYearEnd(newValue);
             }}
-            renderInput={(params) => <TextField {...params} helperText={null} />}
+            renderInput={(params) => 
+              <TextField 
+                {...params} 
+                helperText={null}
+                sx={{
+                  svg: { color },
+                  input: { color },
+                  label: { color }
+                }} 
+              />}
             sx={{ marginTop: '2rem' }}
           />
         </Grid>
@@ -114,6 +138,7 @@ export const SearchPage = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              required={!searchInput}
             />
           </Search>
           <Button 
@@ -129,7 +154,7 @@ export const SearchPage = () => {
             <CircularProgress />
           </Box> 
           :
-          <SearchResultList searchResults={searchResults} />
+          <SearchResultList searchResults={searchResults} loaded={loaded} />
         }
       </header>
     </div>
