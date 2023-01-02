@@ -1,14 +1,18 @@
 import './App.css';
-import nasaLogo from './nasa.svg';
 import { useState } from 'react';
+import nasaLogo from './nasa.svg';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import { getSearch } from './ApiService';
-import { styled, alpha } from '@mui/material/styles';
 import { Typography } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import TextField from '@mui/material/TextField';
+import { DatePicker } from '@mui/x-date-pickers';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles';
 import { SearchResultList } from './SearchResultList';
 import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { startOfYear } from 'date-fns';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,11 +64,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const SearchPage = () => {
   let [searchResults, setSearchResults] = useState([]);
+  let [yearStart, setYearStart] = useState();
+  let [yearEnd, setYearEnd] = useState();
 
   const onSubmitSearch = (val) => {
     val.preventDefault();  
+    const finalYearStart = yearStart ? yearStart.getFullYear().toString() : '';
+    const finalYearEnd = yearEnd ? yearEnd.getFullYear().toString() : '';
 
-    getSearch(val.currentTarget[0].value)
+    getSearch(val.currentTarget[0].value, finalYearStart, finalYearEnd)
     .then((data) => setSearchResults(data.collection.items))
     console.log(searchResults);
   };
@@ -83,9 +91,29 @@ export const SearchPage = () => {
           NASA Image Collection
         </Typography>
         <img src={nasaLogo} className="App-logo" alt="logo" />
+        <Stack margin={'4rem'} flexDirection='row' justifyContent={'space-between'}>
+         <DatePicker
+            views={['year']}
+            label="Search Start Year"
+            value={yearStart}
+            onChange={(newValue) => {
+              setYearStart(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} helperText={null} />}
+          />
+          <DatePicker
+            views={['year']}
+            label="Search End Year"
+            value={yearEnd}
+            onChange={(newValue) => {
+              setYearEnd(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} helperText={null} />}
+          />
+        </Stack>
         <form onSubmit={onSubmitSearch}>
           <Search>
-              <SearchIconWrapper type='submit'>
+              <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
@@ -93,6 +121,7 @@ export const SearchPage = () => {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
+            <button type='submit' style={{width: '3rem'}}></button>
         </form>
         <SearchResultList searchResults={searchResults} />
       </header>

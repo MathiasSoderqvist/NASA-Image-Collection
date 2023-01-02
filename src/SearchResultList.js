@@ -19,13 +19,12 @@ export const SearchResultList = ({ searchResults }) => {
     Object.keys(searchResults).forEach((key) => {
       if (item.target.currentSrc === searchResults[key].links[0].href) {
         setShowPageItem(searchResults[key]);
-        console.log('setttttting', searchResults[key])
       }
     });
     item.preventDefault();
     navigate('/ShowPage');
   }
-console.log("CONTEXT", showPageItem);
+  
   return (
     <Grid container spacing={2} justifyContent='center' marginTop={'2rem'} xs={12} sm={7} md={6}>
       <ImageList sx={{ width: '60rem', height: '30rem' }}  xs={12} sm={7} md={6}>

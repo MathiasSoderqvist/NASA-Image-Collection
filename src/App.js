@@ -4,6 +4,9 @@ import { SearchPage } from './SearchPage';
 import { ShowPage } from './ShowPage';
 import { ShowPageItemContext } from './ShowPageItemContext';
 import { useMemo, useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 const App = () => {
   const [showPageItem, setShowPageItem] = useState();
@@ -14,12 +17,14 @@ const App = () => {
 
   return (
     <ShowPageItemContext.Provider value={value}>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<SearchPage/>} />
-          <Route path='/ShowPage' element={<ShowPage/>} />
-        </Routes>
-      </BrowserRouter>
+      <LocalizationProvider dateAdapter={AdapterDateFns} utils={DateFnsUtils}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<SearchPage/>} />
+            <Route path='/ShowPage' element={<ShowPage/>} />
+          </Routes>
+        </BrowserRouter>
+      </LocalizationProvider>
     </ShowPageItemContext.Provider>
   );
 }
