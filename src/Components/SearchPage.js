@@ -3,10 +3,9 @@ import { useState } from 'react';
 
 import nasaLogo from '../nasa.svg';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { getSearch } from '../ApiService';
 import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers';
@@ -85,7 +84,7 @@ export const SearchPage = () => {
         <Typography variant='h1'>
           <span><img src={nasaLogo} className="App-logo" alt="logo" /> Image Collection</span>
         </Typography>
-        <Stack margin={'4rem'} flexDirection='row' justifyContent={'space-between'}>
+        <Grid container margin={'4rem'} justifyContent='space-evenly' alignItems='center'>
          <DatePicker
             views={['year']}
             value={yearStart}
@@ -94,6 +93,7 @@ export const SearchPage = () => {
               setYearStart(newValue);
             }}
             renderInput={(params) => <TextField {...params} helperText={null} />}
+            sx={{ marginBottom: '2rem' }}
           />
           <DatePicker
             value={yearEnd}
@@ -103,8 +103,9 @@ export const SearchPage = () => {
               setYearEnd(newValue);
             }}
             renderInput={(params) => <TextField {...params} helperText={null} />}
+            sx={{ marginTop: '2rem' }}
           />
-        </Stack>
+        </Grid>
         <form onSubmit={onSubmitSearch}>
           <Search>
             <SearchIconWrapper>
