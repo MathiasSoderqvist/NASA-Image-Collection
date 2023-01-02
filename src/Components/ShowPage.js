@@ -1,22 +1,26 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { useContext } from 'react';
+
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
+import { Stack } from '@mui/material';
+import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import { red } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Collapse from '@mui/material/Collapse';
+import CardMedia from '@mui/material/CardMedia';
+import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useContext } from 'react';
-import { ShowPageItemContext } from './ShowPageItemContext';
-import { Stack } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ShowPageItemContext } from '../ShowPageItemContext';
+
+const StyledSpan = styled('span')({
+  fontWeight: 'bold',
+});
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,8 +37,8 @@ export const ShowPage = () => {
   const [expanded, setExpanded] = React.useState(false);
   const { showPageItem } = useContext(ShowPageItemContext);
   
-  const dateCreated = showPageItem.data[0].date_created.substring(0, 10);
   const keywords = showPageItem.data[0].keywords.join(', ');
+  const dateCreated = showPageItem.data[0].date_created.substring(0, 10);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -46,27 +50,25 @@ export const ShowPage = () => {
   
   return (
     <Stack justifyContent={'center'} alignItems='center'>
-      <button onClick={goBack}>Back to Search</button>
+      <Button variant='contained' onClick={goBack} sx={{ marginTop: '5rem' }}>Back to Search</Button>
       <Card sx={{ maxWidth: 350, marginTop: '5rem' }} >
         <CardHeader
+          subheader={dateCreated}
+          title={showPageItem.data[0].title}
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              NASA
-            </Avatar>
+            <Avatar src={showPageItem.links[0].href} sx={{ bgcolor: red[500] }} aria-label="recipe"/>
           }
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
           }
-          title={showPageItem.data[0].title}
-          subheader={dateCreated}
         />
         <CardMedia
-          component="img"
           height="194"
-          image={showPageItem.links[0].href}
+          component="img"
           alt={showPageItem.data[0].title}
+          image={showPageItem.links[0].href}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -77,28 +79,22 @@ export const ShowPage = () => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
           <ExpandMore
             expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
             aria-label="show more"
+            aria-expanded={expanded}
+            onClick={handleExpandClick}
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography fontWeight={600} paragraph>
+            <Typography fontStyle='italic' paragraph>
               {showPageItem.data[0].description}
             </Typography>
-            <Typography paragraph>
-              Keywords: {keywords}
+            <Typography fontStyle='italic'>
+              <StyledSpan>Keywords:</StyledSpan> {keywords}
             </Typography>
           </CardContent>
         </Collapse>

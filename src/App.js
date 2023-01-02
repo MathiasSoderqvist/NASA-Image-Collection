@@ -1,12 +1,12 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchPage } from './SearchPage';
-import { ShowPage } from './ShowPage';
-import { ShowPageItemContext } from './ShowPageItemContext';
 import { useMemo, useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import DateFnsUtils from '@date-io/date-fns';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ShowPage } from './Components/ShowPage';
+import { SearchPage } from './Components/SearchPage';
 import { LocalizationProvider } from "@mui/x-date-pickers";
+import { ShowPageItemContext } from './ShowPageItemContext';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const App = () => {
   const [showPageItem, setShowPageItem] = useState();

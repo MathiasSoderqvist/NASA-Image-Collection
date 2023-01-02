@@ -8,7 +8,6 @@ function fetchRequest (path, options) {
   .catch((error) => console.log(`Error fetching ${path}`, error))
 }
 
-//SEARCH
 export const getSearch = (searchWord, year_start, year_end) => {
   let queryString = '/search?q='+ searchWord + '&media_type=image';
   if (year_start && year_end) {
