@@ -13,13 +13,11 @@ test('input renders as expected', () => {
   expect(screen.getByTestId('my-input')).toBeInTheDocument()
 });
 
-//test search button with id my-button
 test('button renders as expected', () => {
   render(<App />);
   expect(screen.getByTestId('my-button')).toBeInTheDocument()
 });
 
-// test typing in input
 test('typing in input', () => {
   render(<App />);
 

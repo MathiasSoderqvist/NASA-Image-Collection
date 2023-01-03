@@ -5,16 +5,11 @@ import { Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from '@mui/material/ImageList';
-// import styled from '@mui/material/styles/styled';
 import IconButton from '@mui/material/IconButton';
 import ListSubheader from '@mui/material/ListSubheader';
 import ImageListItem from '@mui/material/ImageListItem';
 import { ShowPageItemContext } from '../ShowPageItemContext';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-
-// const StyledDiv = styled('div')({
-//   marginTop: '2rem',
-// });
 
 export const SearchResultList = ({ searchResults, loaded }) => {
   //showpageitem context
@@ -34,7 +29,7 @@ export const SearchResultList = ({ searchResults, loaded }) => {
   const noResults = () => {
   if (loaded && !searchResults.length) {
     return(
-      <Typography>
+      <Typography marginTop={'2rem'}>
         No results found. Please try again.
       </Typography>
     )
@@ -44,7 +39,7 @@ export const SearchResultList = ({ searchResults, loaded }) => {
   }
   return (
     <>
-      <div>
+      <div marginTop={'2rem'}>
         {noResults()}
       </div>
       <Grid container spacing={2} justifyContent='center' marginTop={'2rem'} xs={12} sm={7} md={6}>
