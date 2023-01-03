@@ -5,9 +5,9 @@ import nasaLogo from '../nasa.svg';
 import Box from '@mui/material/Box';
 import { getSearch } from '../ApiService';
 import Button from '@mui/material/Button';
-import { Grid, Typography } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
+import { Grid, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -136,12 +136,14 @@ export const SearchPage = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              data-testid="my-input"
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               required={!searchInput}
             />
           </Search>
           <Button 
+            data-testid="my-button"
             type='submit' 
             variant='outlined'  
             style={{minWidth: '8rem', marginTop: '2rem'}} 
@@ -160,3 +162,4 @@ export const SearchPage = () => {
     </div>
   );
 }
+

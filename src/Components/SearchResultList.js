@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from '@mui/material/ImageList';
+// import styled from '@mui/material/styles/styled';
 import IconButton from '@mui/material/IconButton';
 import ListSubheader from '@mui/material/ListSubheader';
 import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { ShowPageItemContext } from '../ShowPageItemContext';
-import { Typography } from '@mui/material';
-import styled from '@mui/material/styles/styled';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 
-const StyledDiv = styled('div')({
-  marginTop: '2rem',
-});
+// const StyledDiv = styled('div')({
+//   marginTop: '2rem',
+// });
 
 export const SearchResultList = ({ searchResults, loaded }) => {
   //showpageitem context
@@ -44,9 +44,9 @@ export const SearchResultList = ({ searchResults, loaded }) => {
   }
   return (
     <>
-      <StyledDiv>
+      <div>
         {noResults()}
-      </StyledDiv>
+      </div>
       <Grid container spacing={2} justifyContent='center' marginTop={'2rem'} xs={12} sm={7} md={6}>
         <ImageList sx={{ width: '60rem', height: '30rem' }}  xs={12} sm={7} md={6}>
           {searchResults.length ? 
