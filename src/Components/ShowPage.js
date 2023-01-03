@@ -58,30 +58,30 @@ export const ShowPage = () => {
           }
         />
         <CardMedia
-          height="194"
-          component="img"
+          height='194'
+          component='img'
           alt={showPageItem.data[0].title}
           image={showPageItem.links[0].href}
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             {showPageItem.data[0].photographer ? showPageItem.data[0].photographer : 'No photographer provided'}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant='body2' color='text.secondary'>
             {showPageItem.data[0].location ? showPageItem.data[0].location : 'No location provided'}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
           <ExpandMore
             expand={expanded}
-            aria-label="show more"
+            aria-label='show more'
             aria-expanded={expanded}
             onClick={handleExpandClick}
           >
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout='auto' unmountOnExit>
           <CardContent>
             <Typography fontStyle='italic' paragraph>
               {showPageItem.data[0].description}

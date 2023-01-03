@@ -85,16 +85,16 @@ export const SearchPage = () => {
   const color = 'white';
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className='App'>
+      <header className='App-header'>
         <Typography variant='h1'>
-          <span><img src={nasaLogo} className="App-logo" alt="logo" /> Image Collection</span>
+          <span><img src={nasaLogo} className='App-logo' alt='logo' /> Image Collection</span>
         </Typography>
         <Grid container margin={'4rem'} justifyContent='space-evenly' alignItems='center'>
          <DatePicker
             views={['year']}
             value={yearStart}
-            label="Search Start Year"
+            label='Search Start Year'
             onChange={(newValue) => {
               setYearStart(newValue);
             }}
@@ -113,7 +113,7 @@ export const SearchPage = () => {
           <DatePicker
             value={yearEnd}
             views={['year']}
-            label="Search End Year"
+            label='Search End Year'
             onChange={(newValue) => {
               setYearEnd(newValue);
             }}
@@ -136,14 +136,14 @@ export const SearchPage = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              data-testid="my-input"
-              placeholder="Search…"
+              data-testid='my-input'
+              placeholder='Search…'
               inputProps={{ 'aria-label': 'search' }}
               required={!searchInput}
             />
           </Search>
           <Button 
-            data-testid="my-button"
+            data-testid='my-button'
             type='submit' 
             variant='outlined'  
             style={{minWidth: '8rem', marginTop: '2rem'}} 

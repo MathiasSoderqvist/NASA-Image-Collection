@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from '@mui/material/ImageList';
 import IconButton from '@mui/material/IconButton';
@@ -45,8 +45,8 @@ export const SearchResultList = ({ searchResults, loaded }) => {
       <Grid container spacing={2} justifyContent='center' marginTop={'2rem'} xs={12} sm={7} md={6}>
         <ImageList sx={{ width: '60rem', height: '30rem' }}  xs={12} sm={7} md={6}>
           {searchResults.length ? 
-            <ImageListItem key="Subheader" cols={2}>
-              <ListSubheader component="div">Search Results</ListSubheader>
+            <ImageListItem key='Subheader' cols={2}>
+              <ListSubheader component='div'>Search Results</ListSubheader>
             </ImageListItem>
             :
             null
